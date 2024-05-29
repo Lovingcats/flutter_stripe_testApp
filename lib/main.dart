@@ -57,6 +57,7 @@ class _StripeExampleState extends State<StripeExample> {
     }
   }
 
+  //client_secret을 불러오고 display 실행시키기
   Future<void> makePayment(BuildContext context) async { 
     try{
       final paymentIntentData = await createPaymentIntent("100", "USD") ?? {};
