@@ -33,6 +33,7 @@ class StripeExample extends StatefulWidget {
 
 class _StripeExampleState extends State<StripeExample> {
 
+  //amount는 돈의 양, currency는 화폐종류 ex) USD, KRW
   dynamic createPaymentIntent(String amount, String currency) async{
     try {
       Map<String, dynamic> body = {
@@ -40,7 +41,6 @@ class _StripeExampleState extends State<StripeExample> {
         'currency': currency,
       };
 
-      //Make post request to Stripe
       var response = await http.post(
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
