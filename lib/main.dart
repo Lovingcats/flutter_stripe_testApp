@@ -76,6 +76,22 @@ class _StripeExampleState extends State<StripeExample> {
     }
   }
 
+  void displayPaymentSheet(BuildContext context) async{
+    try {
+      await Stripe.instance.presentPaymentSheet().then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("결제가 성공적으로 진행되셨습니다!")));
+      }).onError((error, stackTrace) {
+        throw Exception(error);
+      });
+    } on StripeException catch (e){
+      if (kDebugMode) {
+        print('결제 오류 : $e');
+      }
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
