@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:flutter_stripe_testapp/secret.dart';
@@ -53,6 +54,24 @@ class _StripeExampleState extends State<StripeExample> {
     } catch (err) {
       print("에러가 발생했습니다!");
       print(err);
+    }
+  }
+
+  Future<void> makePayment(BuildContext context) async {
+    try{
+      final paymentIntentData = await createPaymentIntent("100", "USD") ?? {};
+
+      await Stripe.instance.initPaymentSheet(paymentSheetParameters: SetupPaymentSheetParameters(
+        paymentIntentClientSecret: paymentIntentData['client_screat'],
+        style: ThemeMode.light,
+        customFlow: false,
+        merchantDisplayName: 'test App'
+      )).then((value) => displayPaymentSheet(context));
+    } catch (err) {
+      if(kDebugMode){
+        print("에러가 발생했습니다!");
+        print(err);
+      }
     }
   }
 
