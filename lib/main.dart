@@ -52,8 +52,10 @@ class _StripeExampleState extends State<StripeExample> {
       );
       return jsonDecode(response.body);
     } catch (err) {
-      print("에러가 발생했습니다!");
-      print(err);
+      if(kDebugMode){
+        print("에러가 발생했습니다!");
+        print(err);
+      }
     }
   }
 
