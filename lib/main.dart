@@ -59,7 +59,7 @@ class _StripeExampleState extends State<StripeExample> {
     }
   }
 
-  //client_secret을 불러오고 display 실행시키기
+  //client_secret을 불러오고 화면에 stripe결제 실행
   Future<void> makePayment(BuildContext context) async { 
     try{
       final paymentIntentData = await createPaymentIntent("100", "USD") ?? {};
@@ -78,6 +78,7 @@ class _StripeExampleState extends State<StripeExample> {
     }
   }
 
+  //결제 성공시 snackbar 실행
   void displayPaymentSheet(BuildContext context) async{
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
