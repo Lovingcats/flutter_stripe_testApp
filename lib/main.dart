@@ -57,12 +57,12 @@ class _StripeExampleState extends State<StripeExample> {
     }
   }
 
-  Future<void> makePayment(BuildContext context) async {
+  Future<void> makePayment(BuildContext context) async { 
     try{
       final paymentIntentData = await createPaymentIntent("100", "USD") ?? {};
 
       await Stripe.instance.initPaymentSheet(paymentSheetParameters: SetupPaymentSheetParameters(
-        paymentIntentClientSecret: paymentIntentData['client_screat'],
+        paymentIntentClientSecret: paymentIntentData['client_secret'],
         style: ThemeMode.light,
         customFlow: false,
         merchantDisplayName: 'test App'
