@@ -67,6 +67,23 @@ class _StripeExampleState extends State<StripeExample> {
           ),
         ),
       ),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              paymentButton()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton paymentButton() {
+    return ElevatedButton(
+      onPressed: () async{
+      },
+      child: const Text("결제 실행"),
     );
   }
 }
