@@ -110,7 +110,7 @@ class _StripeExampleState extends State<StripeExample> {
         child: Center(
           child: Column(
             children: [
-              paymentButton()
+              paymentButton(context)
             ],
           ),
         ),
@@ -118,9 +118,10 @@ class _StripeExampleState extends State<StripeExample> {
     );
   }
 
-  ElevatedButton paymentButton() {
+  ElevatedButton paymentButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async{
+      onPressed: (){
+        makePayment(context);
       },
       child: const Text("결제 실행"),
     );
