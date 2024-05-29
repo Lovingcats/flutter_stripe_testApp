@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:flutter_stripe_testapp/secret.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,29 @@ class StripeExample extends StatefulWidget {
 }
 
 class _StripeExampleState extends State<StripeExample> {
+
+  dynamic createPaymentIntent(String amount, String currency) async{
+    try {
+      Map<String, dynamic> body = {
+        'amount': amount,
+        'currency': currency,
+      };
+
+      //Make post request to Stripe
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        headers: {
+          'Authorization': 'Bearer $secretKey',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body,
+      );
+      return jsonDecode(response.body);
+    } catch (err) {
+      print("에러가 발생했습니다!");
+      print(err);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
