@@ -7,7 +7,6 @@ import 'package:flutter_stripe_testapp/secret.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = publishableKey;
   runApp(const MyApp());
 }
@@ -53,7 +52,7 @@ class _StripeExampleState extends State<StripeExample> {
       return jsonDecode(response.body);
     } catch (err) {
       if(kDebugMode){
-        print("에러가 발생했습니다!");
+        print("1 : 에러가 발생했습니다!");
         print(err);
       }
     }
@@ -62,7 +61,7 @@ class _StripeExampleState extends State<StripeExample> {
   //client_secret을 불러오고 화면에 stripe결제 실행
   Future<void> makePayment(BuildContext context) async { 
     try{
-      final paymentIntentData = await createPaymentIntent("100", "USD") ?? {};
+      var paymentIntentData = await createPaymentIntent("100", "USD") ?? {};
 
       await Stripe.instance.initPaymentSheet(paymentSheetParameters: SetupPaymentSheetParameters(
         paymentIntentClientSecret: paymentIntentData['client_secret'],
@@ -72,7 +71,7 @@ class _StripeExampleState extends State<StripeExample> {
       )).then((value) => displayPaymentSheet(context));
     } catch (err) {
       if(kDebugMode){
-        print("에러가 발생했습니다!");
+        print("2 : 에러가 발생했습니다!");
         print(err);
       }
     }
